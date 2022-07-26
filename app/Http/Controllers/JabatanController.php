@@ -31,7 +31,7 @@ class JabatanController extends Controller
      */
     public function create()
     {
-        //
+        return view('jabatan.form');
     }
 
     /**
@@ -42,7 +42,13 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $jab = new Jabatan;
+
+        $jab->kode = $request->kode;
+        $jab->jabatan = $request->jabatan;
+        $jab->save();
+
+        return redirect('/jabatan');
     }
 
     /**
@@ -64,7 +70,9 @@ class JabatanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $jabatan = Jabatan::find($id);
+        return view('jabatan.edit',compact('jabatan'));
+        
     }
 
     /**
@@ -76,7 +84,13 @@ class JabatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $jabatan = Jabatan::find($id);
+
+        $jabatan->kode = $request->kode;
+        $jabatan->jabatan = $request->jabatan;
+        $jabatan->save();
+
+        return redirect('/jabatan');
     }
 
     /**
@@ -87,6 +101,9 @@ class JabatanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $jab = Jabatan::find($id);
+        $jab->delete();
+
+        return redirect('/jabatan');
     }
 }
