@@ -7,12 +7,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
         <div class="col-sm-6">
-            <h1>Data Jabatan</h1>
+            <h1>Data Karyawan</h1>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Data Jabatan</li>
+            <li class="breadcrumb-item active">Data Karyawan</li>
             </ol>
         </div>
         </div>
@@ -25,7 +25,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-        <a href="/jabatan/form" class="btn btn-primary">Tambah Data</a>
+        <a href="/karyawan/form" class="btn btn-primary">Tambah Data</a>
 
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -41,19 +41,23 @@
                 <thead>
                     <tr>
                     <th>NO</th>
-                    <th>KODE</th>
+                    <th>NIK</th>
+                    <th>NAMA</th>
+                    <th>TEMPAT/TGL LAHIR</th>
                     <th>JABATAN</th>
                     <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($jabatan as $item)
+                    @forelse ($karyawan as $item)
                     <tr>
                         <td>{{$nomor++}}</td>
-                        <td>{{$item->kode}}</td>
-                        <td>{{$item->jabatan}}</td>
+                        <td>{{$item->nik}}</td>
+                        <td>{{$item->nama}}</td>
+                        <td>{{$item->tempat_lahir}}/{{date_format(date_create($item->tanggal_lahir),'d-M-Y')}}</td>
+                        <td>{{$item->jabatans->jabatan}}</td>
                         <td>
-                            <a href="/jabatan/edit/{{$item->id}}" class="btn btn-sm text-white btn-info"><i class="fa fa-pencil-alt"></i></a>
+                            <a href="/karyawan/edit/{{$item->id}}" class="btn btn-sm text-white btn-info"><i class="fa fa-pencil-alt"></i></a>
                                 <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#a{{$item->id}}">
                                   <i class="fa fa-trash-alt"></i>
                                 </button>
@@ -66,11 +70,11 @@
                                         <h5 class="modal-title" id="exampleModalLabel">Peringatan</h5>
                                       </div>
                                       <div class="modal-body">
-                                        Yakin ingin menghapus jabatan <b>{{$item->kode}}-{{$item->jabatan}}</b> ?
+                                        Yakin ingin menghapus karyawan <b>{{$item->nama}}</b> ?
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                        <form method="POST" action="/jabatan/{{$item->id}}">
+                                        <form method="POST" action="/karyawan/{{$item->id}}">
                                           @csrf
                                           @method('DELETE')
                                           <button type="submit" class="btn btn-primary">Hapus</button>
