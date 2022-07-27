@@ -19,6 +19,7 @@ class JabatanController extends Controller
     
     public function index()
     {
+        // $this->authorize('create',Jabatan::class);
         $nomor = 1;
         $jabatan = Jabatan::all();
         return view('jabatan.index',compact('nomor','jabatan'));
@@ -42,6 +43,7 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create',Jabatan::class);
         $jab = new Jabatan;
 
         $jab->kode = $request->kode;

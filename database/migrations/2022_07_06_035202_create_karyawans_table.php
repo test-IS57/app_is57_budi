@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nik')->unique();
             $table->string('nama');
-            $table->string('tempat lahir');
+            $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
             $table->string('email');
             $table->bigInteger('jabatans_id');
